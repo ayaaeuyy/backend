@@ -8,12 +8,16 @@ const Op = require('sequelize').Op
 // create function for read all data
 exports.getAllUser = async (request, response) => {
     // call findAll() to get all data
-    let users = await userModel.findAll()
-    return response.json({
-        success: true,
-        data: users,
-        message: 'All users have been loaded'
-    })
+    try {
+        let users = await userModel.findAll();
+        response.json({
+            success: true,
+            data: users,
+            message: 'All users have been loaded'
+        })
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 exports.getOneUser = async (request, response) => {
